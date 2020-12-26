@@ -13,7 +13,6 @@ const Home = () => {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    console.log('did mount');
     gapi = window['gapi'];
     handleClientLoad(
       () => setSign(false),

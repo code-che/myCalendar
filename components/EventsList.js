@@ -16,7 +16,6 @@ const EventsList = ({ events, setShow }) => {
           </tr>
         </thead>
         <tbody>
-          {console.log(events)}
           {events.map((event, index) => (
             <tr key={index}>
               <td className="text-truncate summary">{event.summary}</td>

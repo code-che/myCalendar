@@ -5,7 +5,6 @@ export const handleClientLoad = (
   callbackFalse,
   eventsCallback
 ) => {
-  console.log('handleClientLoad');
   const script = document.createElement('script');
   script.src = 'https://apis.google.com/js/api.js';
   document.body.appendChild(script);
@@ -17,7 +16,6 @@ export const handleClientLoad = (
 };
 
 export const initClient = (callbackTrue, callbackFalse, eventsCallback) => {
-  console.log('initClient');
   gapi.client.init(googleApiConfigs).then(
     () => {
       gapi.auth2
@@ -48,7 +46,6 @@ export const updateSigninStatus = (
   callbackFalse,
   eventsCallback
 ) => {
-  console.log('updateSigninStatus');
   if (isSignedIn) {
     // setSign(false);
     callbackTrue();
@@ -60,18 +57,15 @@ export const updateSigninStatus = (
 };
 
 export const handleAuthClick = () => {
-  console.log('handleAuthClick');
   gapi.auth2.getAuthInstance().signIn();
 };
 
 export const handleSignoutClick = (callback) => {
-  console.log('handleSignoutClick');
   gapi.auth2.getAuthInstance().signOut();
   callback();
 };
 
 export const listUpcomingEvents = (callback) => {
-  console.log('listUpcomingEvents');
   gapi.client.calendar.events
     .list({
       calendarId: 'primary',
