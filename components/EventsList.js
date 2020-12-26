@@ -9,16 +9,28 @@ const EventsList = ({ events, setShow }) => {
         <thead>
           <tr>
             <th scope="col">Name</th>
-            <th scope="col">Due</th>
+            <th scope="col">From</th>
+            <th scope="col">To</th>
             <th scope="col">Description</th>
             <th scope="col">Recurring</th>
           </tr>
         </thead>
         <tbody>
+          {console.log(events)}
           {events.map((event, index) => (
             <tr key={index}>
               <td className="text-truncate summary">{event.summary}</td>
-              <td>{moment(event.end.dateTime).format('MMM/DD/YY HH:mm')}</td>
+              {event.start.dateTime ? (
+                <>
+                  <td>{moment(event.start.dateTime).format('MMM/DD HH:mm')}</td>
+                  <td>{moment(event.end.dateTime).format('MMM/DD HH:mm')}</td>
+                </>
+              ) : (
+                <>
+                  <td>{moment(event.start.date).format('MMM/DD YYYY')}</td>
+                  <td>{moment(event.end.date).format('MMM/DD YYYY')}</td>
+                </>
+              )}
               <td className="text-truncate description">
                 {event.description?.indexOf('<') === 0
                   ? null
