@@ -1,30 +1,34 @@
-# Introduction
-We want a simple app to get events of a specific calendar, and add events to it through google calendar APIs. It is consisted of a simple page which shows a lazy loaded list of events with following description:
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-- event description
-- event name
-- due date
-- repeat
+## Getting Started
 
-and also a floating action button in the bottom of page which opens a modal that gets the cited fields, and creates a new event (must be created in google calendar).
+First, run the development server:
 
-## Note
-It is highly recommended to use Next.Js.
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-# Expectations
-So What does matter to us?
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-- a clean structure of codebase
-- clean code practices
-- getting familiar with state management practices & patterns
-- finally & most important, ability to learn (this project is primarily a test to see how you can learn the things you do not know, so don't be afraid if you don't know a subject, that is our goal)
+You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-# Tasks
-1. Fork this repository
-2. Estimate the develop & send it to us
-3. Break and specify your tasks in project management tool
-4. Learn & Develop
-5. Push your code to your repository
-6. Send us a pull request, we will review and get back to you
-7. Enjoy
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
