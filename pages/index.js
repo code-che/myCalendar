@@ -4,7 +4,12 @@ import Head from 'next/head';
 import { Button, Col, Form, Modal, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import styles from '../styles/Home.module.css';
-import googleApiConfigs from '../googleApiConfigs';
+import {
+  addNewEvent,
+  handleAuthClick,
+  handleClientLoad,
+  handleSignoutClick,
+} from '../utils/googleCalendartApis';
 
 let gapi = null;
 
@@ -14,78 +19,14 @@ const Home = () => {
   const [show, setShow] = useState(false);
   const [formState, setForm] = useState({ summary: '', description: '' });
 
-  const handleClientLoad = () => {
-    console.log('handleClientLoad');
-    const script = document.createElement('script');
-    script.src = 'https://apis.google.com/js/api.js';
-    document.body.appendChild(script);
-    script.onload = () => {
-      window['gapi'].load('client:auth2', initClient);
-    };
-  };
-
-  const initClient = () => {
-    console.log('initClient');
-    gapi.client.init(googleApiConfigs).then(
-      () => {
-        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-
-        updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-      },
-      (e) => console.log(e)
-    );
-  };
-
-  const updateSigninStatus = (isSignedIn) => {
-    console.log('updateSigninStatus');
-    if (isSignedIn) {
-      setSign(false);
-      listUpcomingEvents();
-    } else {
-      setSign(true);
-    }
-  };
-
-  const handleAuthClick = () => {
-    console.log('handleAuthClick');
-    gapi.auth2.getAuthInstance().signIn();
-  };
-
-  const handleSignoutClick = () => {
-    console.log('handleSignoutClick');
-    gapi.auth2.getAuthInstance().signOut();
-  };
-
-  const listUpcomingEvents = () => {
-    console.log('listUpcomingEvents');
-    gapi.client.calendar.events
-      .list({
-        calendarId: 'primary',
-        timeMin: new Date().toISOString(),
-        showDeleted: false,
-        singleEvents: true,
-        maxResults: 10,
-        orderBy: 'startTime',
-      })
-      .then((res) => {
-        const events = res.result.items;
-        setEvents(events);
-      });
-  };
-
-  const addNewEvent = (event) => {
-    const request = gapi.client.calendar.events.insert({
-      calendarId: 'primary',
-      resource: event,
-    });
-
-    request.execute(() => console.log('event added!'));
-  };
-
   useEffect(() => {
     console.log('did mount');
     gapi = window['gapi'];
-    handleClientLoad();
+    handleClientLoad(
+      () => setSign(false),
+      () => setSign(true),
+      setEvents
+    );
   }, []);
 
   const handleSubmit = (e) => {
@@ -135,7 +76,7 @@ const Home = () => {
           <Button
             variant="secondary"
             className={`ml-2 ${styles['sign-out-button']}`}
-            onClick={handleSignoutClick}
+            onClick={() => handleSignoutClick(() => setEvents([]))}
           >
             Sign Out
           </Button>
