@@ -1,19 +1,11 @@
-import { Button, Table } from 'react-bootstrap';
+import { Button, Container, Table } from 'react-bootstrap';
 import moment from 'moment';
 import styles from '../styles/Home.module.css';
-import { handleSignoutClick } from '../utils/googleCalendartApis';
 
-const EventsList = ({ events, setEvents, setShow }) => {
+const EventsList = ({ events, setShow }) => {
   return (
-    <>
-      <Button
-        variant="secondary"
-        className={`ml-2 ${styles['sign-out-button']}`}
-        onClick={() => handleSignoutClick(() => setEvents([]))}
-      >
-        Sign Out
-      </Button>
-      <Table className="mt-5">
+    <Container className="pt-5 overflow-auto">
+      <Table>
         <thead>
           <tr>
             <th scope="col">Name</th>
@@ -25,9 +17,9 @@ const EventsList = ({ events, setEvents, setShow }) => {
         <tbody>
           {events.map((event, index) => (
             <tr key={index}>
-              <td>{event.summary}</td>
+              <td className="text-truncate summary">{event.summary}</td>
               <td>{moment(event.end.dateTime).format('MMM/DD/YY HH:mm')}</td>
-              <td>
+              <td className="text-truncate description">
                 {event.description?.indexOf('<') === 0
                   ? null
                   : event.description}
@@ -49,7 +41,7 @@ const EventsList = ({ events, setEvents, setShow }) => {
           className={styles['plus-icon']}
         />
       </Button>
-    </>
+    </Container>
   );
 };
 

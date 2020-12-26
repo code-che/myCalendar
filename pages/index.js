@@ -3,6 +3,7 @@ import Head from 'next/head';
 import 'bootstrap/dist/css/bootstrap.css';
 import { handleClientLoad } from '../utils/googleCalendartApis';
 import { EventsList, Login, NewEventModal } from '../components';
+import { Header } from '../Layout';
 
 let gapi = null;
 
@@ -23,7 +24,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="p-5 position-relative vh-100">
+      <div className="position-relative vh-100">
         <Head>
           <title>Create Next App</title>
           <link rel="icon" href="/favicon.ico" />
@@ -33,7 +34,10 @@ const Home = () => {
         {signedIn ? (
           <Login />
         ) : (
-          <EventsList events={events} setEvents={setEvents} setShow={setShow} />
+          <>
+            <Header setEvents={setEvents} />
+            <EventsList events={events} setShow={setShow} />
+          </>
         )}
       </div>
 

@@ -1,0 +1,12 @@
+th,
+td {
+  white-space: nowrap;
+}
+
+.summary {
+  max-width: 250px;
+}
+
+.description {
+  max-width: 350px;
+}
