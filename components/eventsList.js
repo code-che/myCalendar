@@ -4,10 +4,13 @@ import CommonMethods from "../public/commonMethods";
 const EventsList = ({events, dispatch}) => {
     console.log(events);
     return (
-        <div className='pt-8 px-4'>
+        <div className='flex flex-col items-center pt-8 px-4'>
+            <button className='w-44 rounded-lg mb-5 p-2 bg-darkcyan shadow-md focus:shadow-none text-white'>
+                ایجاد رویداد
+            </button>
             {
                 events.map((event, index) =>
-                    <div key={index} className='border-2 border-cyan rounded-lg mb-5 p-3 box-border'>
+                    <div key={index} className='border-2 border-cyan rounded-lg w-full mb-5 p-3 box-border'>
                         <div className='flex justify-between mb-4'>
                             <h2 className='text-2xl'>{event.summary}</h2>
                             <div className='flex'>
