@@ -1,5 +1,4 @@
 import {connect} from 'react-redux';
-import mapStateToProps from "react-redux/lib/connect/mapStateToProps";
 
 const Login = ({googleApi, dispatch}) => {
 
@@ -53,10 +52,10 @@ const Login = ({googleApi, dispatch}) => {
     )
 };
 
-const mapStateToPropsLogin = state => {
+const mapStateToProps = state => {
     return {
         googleApi: state.googleApi,
     }
 };
 
-export default connect(mapStateToPropsLogin)(Login);
+export default connect(mapStateToProps)(Login);
