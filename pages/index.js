@@ -2,6 +2,7 @@ import {useEffect} from 'react';
 import Head from "next/head";
 import {connect} from 'react-redux';
 import Login from "../components/login";
+import EventsList from "../components/eventsList";
 
 const Home = ({events, googleApi, dispatch}) => {
 
@@ -23,7 +24,12 @@ const Home = ({events, googleApi, dispatch}) => {
 
             {
                 googleApi.isAuthenticated ?
-                    null
+                    events.length > 0 ?
+                        <EventsList/>
+                        :
+                        <div>
+                            هیچ رویدادی برای شما تنظیم نشده است
+                        </div>
                     :
                     <Login/>
             }

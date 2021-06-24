@@ -26,7 +26,7 @@ const Login = ({googleApi, dispatch}) => {
                     dispatch({
                         type: 'UPDATE-EVENTS',
                         data: {
-                            events: [res.result.items]
+                            events: [...res.result.items]
                         }
                     });
 
