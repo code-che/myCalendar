@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 const Home = ({events, dispatch}) => {
 
     useEffect(() => {
+
     }, []);
 
     return (
@@ -15,6 +16,7 @@ const Home = ({events, dispatch}) => {
 const mapStateToProps = state => {
     return {
         events: state.events,
+        googleApi: state.googleApi
     }
 };
 
