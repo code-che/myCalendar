@@ -3,6 +3,7 @@ import Head from "next/head";
 import {connect} from 'react-redux';
 import Login from "../components/login";
 import EventsList from "../components/eventsList";
+import CreateEventModal from "../components/createEventModal";
 
 const Home = ({events, googleApi, dispatch}) => {
 
@@ -33,6 +34,8 @@ const Home = ({events, googleApi, dispatch}) => {
                     :
                     <Login/>
             }
+
+            <CreateEventModal/>
 
         </div>
     )

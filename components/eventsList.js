@@ -3,9 +3,19 @@ import CommonMethods from "../public/commonMethods";
 
 const EventsList = ({events, dispatch}) => {
     console.log(events);
+
+    const handleClickOnCreateBtn = () => {
+        dispatch({
+            type: 'SHOW-MODAL'
+        })
+    };
+
     return (
         <div className='flex flex-col items-center pt-8 px-4'>
-            <button className='w-44 rounded-lg mb-5 p-2 bg-darkcyan shadow-md focus:shadow-none text-white'>
+            <button
+                className='w-44 rounded-lg mb-5 p-2 bg-darkcyan shadow-md focus:shadow-none text-white'
+                onClick={handleClickOnCreateBtn}
+            >
                 ایجاد رویداد
             </button>
             {
