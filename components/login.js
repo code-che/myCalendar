@@ -43,9 +43,9 @@ const Login = ({googleApi, dispatch}) => {
     };
 
     return (
-        <div>
-            <p>برای نمایش رویداد های شما باید ابتدا وارد حساب گوگل تان شوید</p>
-            <button onClick={handleClickOnLoginBtn}>
+        <div className='flex flex-col justify-around items-center w-6/12 h-44 mx-auto mt-10 border-2 border-cyan rounded-lg'>
+            <p className=''>برای نمایش رویداد های شما باید ابتدا وارد حساب گوگل تان شوید</p>
+            <button className='w-44 rounded-lg p-2 bg-darkblue shadow-md focus:shadow-none text-white'  onClick={handleClickOnLoginBtn}>
                 ورود با حساب گوگل
             </button>
         </div>

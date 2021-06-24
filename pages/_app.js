@@ -1,4 +1,4 @@
-import 'tailwindcss/tailwind.css'
+import '../styles/globals.css';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import reducer from '../services/redux';
