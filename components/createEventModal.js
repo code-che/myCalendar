@@ -4,10 +4,11 @@ import Modal from 'react-modal';
 import { DatePicker } from "jalali-react-datepicker";
 import modalStyle from '../styles/Modal.module.css';
 
-const CreateEventModal = ({modal, dispatch}) => {
+const CreateEventModal = ({modal, googleApi, dispatch}) => {
 
     const [titleInput, setTitleInput] = useState('');
     const [descriptionInput, setDescriptionInput] = useState('');
+    const [date, setDate] = useState(new Date());
 
     const closeModal = () => {
         dispatch({
@@ -15,18 +16,59 @@ const CreateEventModal = ({modal, dispatch}) => {
         })
     };
 
-    const handleClickOnSubmit = event => {
-        event.preventDefault();
-        // if (validation()) {
-        //
-        // }
+    const submitDate = e => {
+        setDate(new Date(e.value._d));
     };
 
-    const validation = () => {
-        if(titleInput === '') {
-            return false
+    const handleClickOnSubmit = event => {
+        event.preventDefault();
+        if (titleInput !== '') {
+            let endTime = new Date(date.getTime() + 1800000);
+            let event = {
+                'summary': titleInput,
+                'description': descriptionInput,
+                'start': {
+                    'dateTime': date,
+                    'timeZone': 'Asia/Tehran'
+                },
+                'end': {
+                    'dateTime': endTime,
+                    'timeZone': 'Asia/Tehran'
+                },
+                'reminders': {
+                    'useDefault': true,
+                }
+            };
+
+            const CLIENT_ID = '419211961546-hl81ad56g30fifhfphmf28ahmnl9l75o.apps.googleusercontent.com';
+            const API_KEY = 'AIzaSyDT58Jvmdj2MtPWB9-BiQ7iXbgC-WyhBTk';
+            const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+            const SCOPES = "https://www.googleapis.com/auth/calendar.events";
+            googleApi.gapi.load('client:auth2', () => {
+                googleApi.gapi.client.init({
+                    apiKey: API_KEY,
+                    clientId: CLIENT_ID,
+                    discoveryDocs: DISCOVERY_DOCS,
+                    scope: SCOPES
+                });
+
+                googleApi.gapi.client.load('calendar', 'v3');
+
+                let request = googleApi.gapi.client.calendar.events.insert({
+                    'calendarId': 'primary',
+                    'resource': event,
+                });
+                request.execute(event => {
+                    dispatch({
+                        type: 'ADD-EVENT',
+                        data: {
+                            event
+                        }
+                    });
+                    closeModal();
+                })
+            });
         }
-        return true;
     };
 
     return (
@@ -59,7 +101,7 @@ const CreateEventModal = ({modal, dispatch}) => {
                         <div className='flex justify-between w-full mb-4'>
                             <label className='w-2/12'>زمان:</label>
                             <div className='border-cyan'>
-                                <DatePicker className='border-gray border-2 rounded-md'/>
+                                <DatePicker className='border-gray border-2 rounded-md' onClickSubmitButton={e=> submitDate(e)}/>
                             </div>
                         </div>
                         <button type='submit'
@@ -78,6 +120,7 @@ const CreateEventModal = ({modal, dispatch}) => {
 const mapStateToProps = state => {
     return {
         modal: state.modal,
+        googleApi: state.googleApi,
     }
 };
 

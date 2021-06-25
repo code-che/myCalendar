@@ -32,6 +32,13 @@ const Login = ({googleApi, dispatch}) => {
 
                     dispatch({
                         type: 'AUTHENTICATED',
+                    });
+
+                    dispatch({
+                        type: 'SET-GAPI',
+                        data: {
+                            gapi: googleApi.gapi
+                        }
                     })
 
                 }).catch(err => {
