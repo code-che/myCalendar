@@ -2,7 +2,6 @@ import {connect} from 'react-redux';
 import CommonMethods from "../public/commonMethods";
 
 const EventsList = ({events, dispatch}) => {
-    console.log(events);
 
     const handleClickOnCreateBtn = () => {
         dispatch({
@@ -11,7 +10,7 @@ const EventsList = ({events, dispatch}) => {
     };
 
     return (
-        <div className='flex flex-col items-center pt-8 px-4'>
+        <div className='flex flex-col lg:w-9/12 md:w-10/12 sm:w-full mx-auto items-center pt-8 px-4'>
             <button
                 className='w-44 rounded-lg mb-5 p-2 bg-darkcyan shadow-md focus:shadow-none text-white'
                 onClick={handleClickOnCreateBtn}
