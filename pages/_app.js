@@ -1,3 +1,4 @@
+import '../styles/font/font-face.css';
 import '../styles/globals.css';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';

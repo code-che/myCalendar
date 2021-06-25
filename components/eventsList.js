@@ -20,7 +20,7 @@ const EventsList = ({events, dispatch}) => {
             </button>
             {
                 events.map((event, index) =>
-                    <div key={index} className='border-2 border-cyan rounded-lg w-full mb-5 p-3 box-border'>
+                    <div key={index} className='border-2 border-cyan rounded-lg w-full mb-5 p-3 box-border shadow-lg'>
                         <div className='flex justify-between mb-4'>
                             <h2 className='text-2xl'>{event.summary}</h2>
                             <div className='flex'>
